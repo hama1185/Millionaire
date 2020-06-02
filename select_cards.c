@@ -89,11 +89,17 @@ void select_cards_restrict(int select_cards[8][15], int my_cards[8][15], state *
   }else{ // 場が単騎のとき
     if(field_status->is_lock==1){ // 場が縛られている
       remove_suit(tmp_cards, field_status->suit, 1);
-      remove_low_card(tmp_cards, field_status->order, 0); 
-      search_low_card(select_cards,tmp_cards,1); 
+      remove_low_card(tmp_cards, field_status->order, 0);
+      make_info_table(info_table,tmp_cards); 
+      if(!search_low_card_wosp(select_cards, info_table, tmp_cards)){
+        search_low_card(select_cards,tmp_cards,1); 
+      }
     }else{ // 場が縛られていない
-      remove_low_card(tmp_cards, field_status->order, 0); 
-      search_low_card(select_cards,tmp_cards,1); 
+      remove_low_card(tmp_cards, field_status->order, 0);
+      make_info_table(info_table,tmp_cards);
+      if(!search_low_card_wosp(select_cards, info_table, tmp_cards)){
+        search_low_card(select_cards,tmp_cards,1); 
+      }
     }
   }
 }

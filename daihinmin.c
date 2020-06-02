@@ -146,3 +146,47 @@ int search_count_pair(int dst_cards[8][15], int info_table[8][15], int my_cards[
   }
   else return 0;
 }
+
+int search_low_card_wosp(int out_cards[8][15], int info_table[8][15], int my_cards[8][15]){
+  int i, j, k, end_loop_flag, end_search_flag = 0;
+  int count_cards;
+
+  clear_table(out_cards);
+  //ペアと階段を除いた最弱カード
+  for(j=1;j<14&&end_loop_flag==0;j++){        //低い方からさがし
+    for(i=0;i<4&&end_loop_flag==0;i++){
+      if(my_cards[i][j]==1){              //カードを見つけたら               
+        //ペアがなく階段もなければそのカードにする
+        end_search_flag = 0;
+        if(info_table[4][j] < 2){
+          if(j > 3){
+            for(k = j;k > (j - 4);k--){
+              if(info_table[i][k] >= 3){
+                end_loop_flag = 1;
+                break;
+              }
+            }
+          }
+          else{//
+            for(k = j;k > 0;k--){
+              if(info_table[i][k] >= 3){
+                end_loop_flag = 1;
+                break;
+              }
+            }
+          }
+          if(!end_search_flag){
+            end_loop_flag=1;                      //フラグを立て
+            out_cards[i][j]=my_cards[i][j];   //out_cardsにのせ,ループを抜ける。
+          }
+        }
+      }
+    }
+  }
+  if(end_loop_flag){
+    return 1;
+  }
+  else{
+    return 0;
+  }
+}
