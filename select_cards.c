@@ -64,7 +64,6 @@ void select_cards_restrict(int select_cards[8][15], int my_cards[8][15], state *
   copy_table(tmp_cards, my_cards); 
 
   if(field_status->is_sequence==1){ // 場が階段のとき
-    printf("stranger is %d\n", field_status->order);
     if(field_status->is_lock==1){ // 場が縛られている
       remove_suit(tmp_cards, field_status->suit, 1);
       remove_low_card(tmp_cards, field_status->order, 0); 
