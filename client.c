@@ -57,10 +57,10 @@ int main(int argc,char* argv[]){
       is_my_turn=receive_cards(own_cards_buf); //カードをown_cards_bufに受け取り 場を状態の読み出し
       if(is_my_turn){  //自分のターンであるかを確認する 自分のターンであればこのブロックが実行される。
         copy_table(own_cards,own_cards_buf);   //カードテーブルをコピー
-	clear_cards(select_cards);             //選んだカードのクリア
+	      clear_cards(select_cards);             //選んだカードのクリア
         get_field_state_from_own_cards(own_cards,&field_status); //場に出ているカードの情報を読み出す
         select_submit_cards(select_cards,own_cards,&field_status);
-	accept_flag=send_cards(select_cards);//cardsを提出
+	      accept_flag=send_cards(select_cards);//cardsを提出
       }
       else{ //自分のターンではない時
         operate_my_cards(own_cards, &field_status);

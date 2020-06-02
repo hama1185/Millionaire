@@ -47,6 +47,9 @@ void select_submit_cards(int out_cards[8][15],int my_cards[8][15], state *field_
 void select_cards_free(int select_cards[8][15], int my_cards[8][15], state *field_status){
 	int info_table[8][15];
 	make_info_table(info_table,my_cards);
+  if(count_cards(select_cards) == 0){
+		search_low_stairs(select_cards, info_table, my_cards);
+	}
 	if(count_cards(select_cards) == 0){
 		search_low_pair(select_cards, info_table, my_cards);
 	}
