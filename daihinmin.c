@@ -82,6 +82,32 @@ int search_low_stairs(int dst_cards[8][15], int info_table[8][15], int my_cards[
 	else return 0;
 }
 
+int search_count_stairs(int dst_cards[8][15], int info_table[8][15], int my_cards[8][15], int num){
+  int i,j,k;
+  int end_flag = 0;
+  int count_cards = num;
+	clear_table(dst_cards);
+	for(i=1;i<=13;i++){
+    for(j=0;j<=3;j++){
+      if(info_table[j][i]>=num){//このカードから初めて階段ができるか
+        end_flag = 1;
+        break;
+      }
+    }
+    if(end_flag){
+      break;
+    }
+	}
+	if(i<=13){
+      for(k=0;k < count_cards;k++){
+        dst_cards[j][i] = my_cards[j][i];
+        i++;
+      }
+		return 1;
+	}
+	else return 0;
+}
+
 int search_low_pair(int dst_cards[8][15], int info_table[8][15], int my_cards[8][15]){
 	int i,j;
 	clear_table(dst_cards);
