@@ -102,21 +102,21 @@ int search_count_pair(int dst_cards[8][15], int info_table[8][15], int my_cards[
 	//num is field pair count
 	int i,j;
   int n = 0;
-        clear_table(dst_cards);
-        for(i=1;i<=13;i++){
-                if(info_table[4][i]>=num){
-                        break;
-                }
-        }
+  clear_table(dst_cards);
+  for(i=1;i<=13;i++){
+    if(info_table[4][i]>=num){
+      break;
+    }
+  }
 	if(i<=13){
-                for(j=0;j<=3;j++){
-                        dst_cards[j][i] = my_cards[j][i];
-                        n += my_cards[j][i];
-                        if(n ==num){
-                          break;
-                        }
-                }
-                return 1;
-        }
-        else return 0;
+    for(j=0;j<=3;j++){
+      dst_cards[j][i] = my_cards[j][i];
+      n += my_cards[j][i];
+      if(n==num){
+        break;
+      }
+    }
+    return 1;
+  }
+  else return 0;
 }
