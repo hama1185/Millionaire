@@ -155,7 +155,7 @@ int search_count_pair(int dst_cards[8][15], int info_table[8][15], int my_cards[
 }
 
 int search_low_card_wosp(int out_cards[8][15], int info_table[8][15], int my_cards[8][15]){
-  int i, j, k, end_loop_flag, end_search_flag = 0;
+  int i, j, k, end_loop_flag = 0, end_search_flag = 0;
   int count_cards;
 
   clear_table(out_cards);
