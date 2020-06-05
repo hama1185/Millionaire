@@ -169,7 +169,7 @@ int search_low_card_wosp(int out_cards[8][15], int info_table[8][15], int my_car
           if(j > 3){
             for(k = j;k > (j - 4);k--){
               if(info_table[i][k] >= 3){
-                end_loop_flag = 1;
+                end_search_flag = 1;
                 break;
               }
             }
@@ -177,13 +177,13 @@ int search_low_card_wosp(int out_cards[8][15], int info_table[8][15], int my_car
           else{//
             for(k = j;k > 0;k--){
               if(info_table[i][k] >= 3){
-                end_loop_flag = 1;
+                end_search_flag = 1;
                 break;
               }
             }
           }
           if(!end_search_flag){
-            end_loop_flag=1;                      //フラグを立て
+            end_loop_flag = 1;                      //フラグを立て
             out_cards[i][j]=my_cards[i][j];   //out_cardsにのせ,ループを抜ける。
           }
         }
@@ -193,9 +193,7 @@ int search_low_card_wosp(int out_cards[8][15], int info_table[8][15], int my_car
   if(end_loop_flag){
     return 1;
   }
-  else{
-    return 0;
-  }
+  else return 0;
 }
 
 int search_low_pair_wj(int dst_cards[8][15], int info_j_table[8][15], int my_cards[8][15]){
