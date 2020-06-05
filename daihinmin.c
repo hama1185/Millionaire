@@ -55,6 +55,13 @@ void make_info_table(int info_table[8][15], int my_cards[8][15]){
 	}
 }
 
+void make_info_j_table(int info_j_table[8][15], int my_cards[8][15]){
+  int i = 0;
+  for(i=1;i<=13;i++){
+		info_j_table[4][i] = my_cards[0][i] + my_cards[1][i] + my_cards[2][i] + my_cards[3][i] + 1;//ペアだし
+	}
+}
+
 int search_low_stairs(int dst_cards[8][15], int info_table[8][15], int my_cards[8][15]){
   int i,j,k;
   int end_flag = 0;
@@ -189,4 +196,28 @@ int search_low_card_wosp(int out_cards[8][15], int info_table[8][15], int my_car
   else{
     return 0;
   }
+}
+
+int search_low_pair_wj(int dst_cards[8][15], int info_j_table[8][15], int my_cards[8][15]){
+  int i,j;
+  int jFlag = 0;//ジョーカーは代入したか
+	clear_table(dst_cards);
+	for(i=1;i<=13;i++){
+		if(info_j_table[4][i]>=2){
+			break;
+		}
+	}
+	if(i<=13){
+		for(j=0;j<=3;j++){
+      if(my_cards[j][i] == 0 && !jFlag){
+        dst_cards[j][i] = 2;
+        jFlag = 1;
+      }
+      else{
+        dst_cards[j][i] = my_cards[j][i];
+      }
+		}
+		return 1;
+	}
+	else return 0;
 }
