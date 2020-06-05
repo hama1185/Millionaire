@@ -49,6 +49,9 @@ void select_cards_free(int select_cards[8][15], int my_cards[8][15], state *fiel
   if(field_status->have_joker){
     make_info_j_table(info_table,my_cards);
     if(count_cards(select_cards) == 0){
+      search_low_stairs_wj(select_cards, info_table, my_cards);
+    }
+    if(count_cards(select_cards) == 0){
       search_low_pair_wj(select_cards, info_table, my_cards);
     }
     if(count_cards(select_cards) == 0){
