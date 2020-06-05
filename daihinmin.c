@@ -64,7 +64,7 @@ void make_info_j_table(int info_j_table[8][15], int my_cards[8][15]){
     for(i = 13;i >= 1;i--){
       endFlag = my_cards[j][i];
       for(k = i; k <= 13 && endFlag < 2;k++){
-        if(my_cards[k][i] == 0){
+        if(my_cards[j][k] == 0){
           endFlag++;
         }
         count++;
