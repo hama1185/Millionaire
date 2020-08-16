@@ -307,12 +307,18 @@ int search_high_stairs_wj(int dst_cards[8][15], int info_j_table[8][15], int my_
   int i,j,k;
   int end_flag = 0;
   int count_cards = 0;
+  int max_i;
+  int max_j;
+  int max = 3;
 	clear_table(dst_cards);
 	for(i=1;i<=13;i++){
     for(j=0;j<=3;j++){
-      if(info_j_table[j][i]>=3){//このカードから初めて階段ができるか
-        end_flag = 1;
+      if(info_j_table[j][i]>=max){//このカードから初めて階段ができるか
+        max_i = i;
+        max_j = j;
+        max = info_j_table[j][i];
         count_cards = info_j_table[j][i];
+        end_flag = 1;
         break;
       }
     }
@@ -320,7 +326,9 @@ int search_high_stairs_wj(int dst_cards[8][15], int info_j_table[8][15], int my_
       break;
     }
 	}
-	if(i<=13){
+	if(count_cards != 0){
+      i = max_i;
+      j = max_j;
       for(k=0;k < count_cards;k++){
         if(my_cards[j][i] == 0){
           dst_cards[j][i] = 2;

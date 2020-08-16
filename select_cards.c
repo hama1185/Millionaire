@@ -61,10 +61,10 @@ void select_cards_free(int select_cards[8][15], int my_cards[8][15], state *fiel
   else{
     make_info_table(info_table,my_cards);
     if(count_cards(select_cards) == 0){
-      search_low_stairs(select_cards, info_table, my_cards);
+      search_max_stairs(select_cards, info_table, my_cards);
     }
     if(count_cards(select_cards) == 0){
-      search_low_pair(select_cards, info_table, my_cards);
+      search_max_pair(select_cards, info_table, my_cards);
     }
     if(count_cards(select_cards) == 0){
       search_low_card(select_cards,my_cards,0); // 手持ちの一番弱いカードを単騎で提出する
