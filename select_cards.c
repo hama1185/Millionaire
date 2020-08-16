@@ -46,16 +46,31 @@ void select_submit_cards(int out_cards[8][15],int my_cards[8][15], state *field_
 
 void select_cards_free(int select_cards[8][15], int my_cards[8][15], state *field_status){
 	int info_table[8][15];
-	make_info_table(info_table,my_cards);
-  if(count_cards(select_cards) == 0){
-		search_low_stairs(select_cards, info_table, my_cards);
-	}
-	if(count_cards(select_cards) == 0){
-		search_low_pair(select_cards, info_table, my_cards);
-	}
-	if(count_cards(select_cards) == 0){
-  		search_low_card(select_cards,my_cards,0); // 手持ちの一番弱いカードを単騎で提出する
-	}
+  if(field_status->have_joker){
+    make_info_j_table(info_table,my_cards);
+    if(count_cards(select_cards) == 0){
+      search_low_stairs_wj(select_cards, info_table, my_cards);
+    }
+    if(count_cards(select_cards) == 0){
+      search_low_pair_wj(select_cards, info_table, my_cards);
+    }
+    if(count_cards(select_cards) == 0){
+      search_low_card(select_cards,my_cards,0);
+    }
+  }
+  else{
+    make_info_table(info_table,my_cards);
+    if(count_cards(select_cards) == 0){
+      search_low_stairs(select_cards, info_table, my_cards);
+    }
+    if(count_cards(select_cards) == 0){
+      search_low_pair(select_cards, info_table, my_cards);
+    }
+    if(count_cards(select_cards) == 0){
+      search_low_card(select_cards,my_cards,0); // 手持ちの一番弱いカードを単騎で提出する
+    }
+  }
+	
 }
 
 void select_cards_restrict(int select_cards[8][15], int my_cards[8][15], state *field_status){
@@ -89,11 +104,17 @@ void select_cards_restrict(int select_cards[8][15], int my_cards[8][15], state *
   }else{ // 場が単騎のとき
     if(field_status->is_lock==1){ // 場が縛られている
       remove_suit(tmp_cards, field_status->suit, 1);
-      remove_low_card(tmp_cards, field_status->order, 0); 
-      search_low_card(select_cards,tmp_cards,1); 
+      remove_low_card(tmp_cards, field_status->order, 0);
+      make_info_table(info_table,tmp_cards); 
+      if(!search_low_card_wosp(select_cards, info_table, tmp_cards)){
+        search_low_card(select_cards,tmp_cards,1); 
+      }
     }else{ // 場が縛られていない
-      remove_low_card(tmp_cards, field_status->order, 0); 
-      search_low_card(select_cards,tmp_cards,1); 
+      remove_low_card(tmp_cards, field_status->order, 0);
+      make_info_table(info_table,tmp_cards);
+      if(!search_low_card_wosp(select_cards, info_table, tmp_cards)){
+        search_low_card(select_cards,tmp_cards,1); 
+      }
     }
   }
 }
