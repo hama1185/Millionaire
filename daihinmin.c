@@ -275,3 +275,59 @@ int search_low_stairs_wj(int dst_cards[8][15], int info_j_table[8][15], int my_c
 	}
 	else return 0;
 }
+
+int search_high_pair_wj(int dst_cards[8][15], int info_j_table[8][15], int my_cards[8][15]){
+  int i,j;
+  int jFlag = 0;//ジョーカーは代入したか
+	clear_table(dst_cards);
+	for(i=1;i<=13;i++){
+		if(info_j_table[4][i]>=2){
+			break;
+		}
+	}
+	if(i<=13){
+		for(j=0;j<=3;j++){
+      if(my_cards[j][i] == 0 && !jFlag){
+        dst_cards[j][i] = 2;
+        jFlag = 1;
+      }
+      else{
+        dst_cards[j][i] = my_cards[j][i];
+      }
+		}
+		return 1;
+	}
+	else return 0;
+}
+
+int search_high_stairs_wj(int dst_cards[8][15], int info_j_table[8][15], int my_cards[8][15]){
+  int i,j,k;
+  int end_flag = 0;
+  int count_cards = 0;
+	clear_table(dst_cards);
+	for(i=1;i<=13;i++){
+    for(j=0;j<=3;j++){
+      if(info_j_table[j][i]>=3){//このカードから初めて階段ができるか
+        end_flag = 1;
+        count_cards = info_j_table[j][i];
+        break;
+      }
+    }
+    if(end_flag){
+      break;
+    }
+	}
+	if(i<=13){
+      for(k=0;k < count_cards;k++){
+        if(my_cards[j][i] == 0){
+          dst_cards[j][i] = 2;
+        }
+        else{
+          dst_cards[j][i] = my_cards[j][i];
+        }
+        i++;
+      }
+		return 1;
+	}
+	else return 0;
+}
