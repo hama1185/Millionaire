@@ -8,3 +8,5 @@ int search_low_card_wosp(int out_cards[8][15], int info_table[8][15], int my_car
 void make_info_j_table(int info_j_table[8][15], int my_cards[8][15]);
 int search_low_pair_wj(int dst_cards[8][15], int info_j_table[8][15], int my_cards[8][15]);
 int search_low_stairs_wj(int dst_cards[8][15], int info_j_table[8][15], int my_cards[8][15]);
+int search_high_pair_wj(int dst_cards[8][15], int info_j_table[8][15], int my_cards[8][15]);
+int search_high_stairs_wj(int dst_cards[8][15], int info_j_table[8][15], int my_cards[8][15]);
