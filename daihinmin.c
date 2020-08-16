@@ -279,20 +279,23 @@ int search_low_stairs_wj(int dst_cards[8][15], int info_j_table[8][15], int my_c
 int search_high_pair_wj(int dst_cards[8][15], int info_j_table[8][15], int my_cards[8][15]){
   int i,j;
   int jFlag = 0;//ジョーカーは代入したか
+  int max = 2;//最大枚数
+  int max_index;
 	clear_table(dst_cards);
 	for(i=1;i<=13;i++){
-		if(info_j_table[4][i]>=2){
-			break;
+		if(info_j_table[4][i] >= max){
+			max_index = i;
+      max = info_j_table[4][i];
 		}
 	}
-	if(i<=13){
+	if(max_index<=13){
 		for(j=0;j<=3;j++){
-      if(my_cards[j][i] == 0 && !jFlag){
-        dst_cards[j][i] = 2;
+      if(my_cards[j][max_index] == 0 && !jFlag){
+        dst_cards[j][max_index] = 2;
         jFlag = 1;
       }
       else{
-        dst_cards[j][i] = my_cards[j][i];
+        dst_cards[j][max_index] = my_cards[j][max_index];
       }
 		}
 		return 1;
